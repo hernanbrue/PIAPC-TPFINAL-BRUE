@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class controller : MonoBehaviour
 {
@@ -10,11 +12,14 @@ public class controller : MonoBehaviour
     float movX;
     float movY;
     public static float vida;
+    public Text vidaText;
+    public GameObject gameOver;
     public GameObject bomba;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         vida = 10f;
+        gameOver.SetActive(false);
     }
 
    
@@ -36,6 +41,18 @@ public class controller : MonoBehaviour
         if(gameObject.transform.position.y < -10)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        vidaText.text = "Vida: " + vida;
+
+        if(vida <= 0)
+        {
+            gameOver.SetActive(true);
+
+            if (Input.GetKey(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
 
     }
