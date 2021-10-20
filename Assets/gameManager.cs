@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
     int vidasActivas;
     public GameObject enemigo;
     public int numeroEnemigos;
+    public GameObject win;
     Vector3 pos;
 
     void Start()
     {
         numeroEnemigos = 20;
+        win.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,7 +23,7 @@ public class gameManager : MonoBehaviour
 
         Debug.Log(controller.vida);
 
-        if(numeroEnemigos > 0){
+        if (numeroEnemigos > 0) {
 
             pos = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
             Instantiate(enemigo, pos, Quaternion.identity);
@@ -28,10 +31,16 @@ public class gameManager : MonoBehaviour
         }
 
 
-        if (vidasActivas <= 0)
+        if (GameObject.FindGameObjectsWithTag("vida").Length <= 0)
         {
-            //JUNTÓ TODAS LAS MONEDAS (MONEDA = 2 VIDAS)
-            Debug.Log("GANÓ");
+            win.SetActive(true);
+
+            
+
+            if (Input.GetKey(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
 
     }

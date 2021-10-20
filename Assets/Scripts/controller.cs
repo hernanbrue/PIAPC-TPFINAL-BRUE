@@ -14,7 +14,6 @@ public class controller : MonoBehaviour
     public static float vida;
     public Text vidaText;
     public GameObject gameOver;
-    public GameObject bomba;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,11 +31,6 @@ public class controller : MonoBehaviour
         rb.AddForce(Vector3.right * movX, ForceMode.Impulse);
         rb.AddForce(Vector3.forward * movY, ForceMode.Impulse);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Vector3 position = new Vector3(transform.position.x, 0, transform.position.z);
-            Instantiate(bomba, position, Quaternion.identity);
-        }
 
         if(gameObject.transform.position.y < -10)
         {
