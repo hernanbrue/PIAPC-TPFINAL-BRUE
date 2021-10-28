@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
     {
         numeroEnemigos = 20;
         win.SetActive(false);
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class gameManager : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("vida").Length <= 0)
         {
             win.SetActive(true);
-
+            Time.timeScale = 0;
             
 
             if (Input.GetKey(KeyCode.R))
