@@ -24,9 +24,13 @@ public class controller : MonoBehaviour
    
     void Update()
     {
+        if(vida > 0)
+        {
+            movX = Input.GetAxis("Horizontal") * fuerza * Time.deltaTime;
+            movY = Input.GetAxis("Vertical") * fuerza * Time.deltaTime;
+        }
 
-        movX = Input.GetAxis("Horizontal") * fuerza * Time.deltaTime;
-        movY = Input.GetAxis("Vertical") * fuerza * Time.deltaTime;
+
         
         rb.AddForce(Vector3.right * movX, ForceMode.Impulse);
         rb.AddForce(Vector3.forward * movY, ForceMode.Impulse);
@@ -42,6 +46,8 @@ public class controller : MonoBehaviour
         if(vida <= 0)
         {
             gameOver.SetActive(true);
+            movX = 0f;
+            movY = 0f;
 
             if (Input.GetKey(KeyCode.R))
             {
